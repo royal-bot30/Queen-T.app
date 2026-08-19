@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUEEN-T - Tableau de bord</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <script src="../js/dashboard.js" defer></script>
+    <script src="../js/indexcopie2.js" defer></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+        import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js"; // Indispensable !
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDYIKtqrK-fUumzBotjwMJqxtpzZeLhUQw",
+            authDomain: "queen-t.firebaseapp.com",
+            projectId: "queen-t",
+            storageBucket: "queen-t.firebasestorage.app",
+            messagingSenderId: "419154805005",
+            appId: "1:419154805005:web:67a8f499188ca891393044"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app); // Indispensable !
+
+        // On expose tout globalement pour que tes fichiers dashboard.js et builder.js puissent les utiliser
+        window.db = db;
+        window.auth = auth;
+        window.dbModules = { collection, getDocs, addDoc, updateDoc, deleteDoc, doc };
+        window.authModules = { onAuthStateChanged };
+    </script>
+</head>
+
+<body class="bg-beige text-dark">
+
+    <!-- NAVIGATION -->
+    <header class="main-header">
+        <div class="logo-container">
+            <h2>📑 QUEEN-T</h2>
+        </div>
+        <nav class="main-nav">
+            <a href="dashboard.html" class="nav-link active">📊 Tableau de bord</a>
+            <a href="builder.html" class="nav-link">✍️ Nouvelle facture</a>
+            <a href="stocks.html" class="nav-link">📦 Stocks</a>
+            <a href="settings.html" class="nav-link">⚙️ Mon profil</a>
+        </nav>
+        <div class="user-menu">
+            <span class="user-avatar">P</span>
+            <a href="index.html" class="logout-btn">Déconnexion</a>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section class="dashboard-header">
+            <div>
+                <h1>Bonjour, Total Clean Pro 👋</h1>
+                <p>Voici un aperçu de ton activité</p>
+            </div>
+            <a href="builder.html" class="btn-primary">+ Nouvelle facture</a>
+        </section>
+
+        <!-- Filtres de période -->
+        <div id="time-filters" class="time-filters">
+            <button id="cet-mois-ci" class="filter-btn active">Ce mois-ci</button>
+            <button id="mois-dernier" class="filter-btn">Mois dernier</button>
+            <button id="3-derniers-mois" class="filter-btn">3 derniers mois</button>
+            <button id="6-derniers-mois" class="filter-btn">6 derniers mois</button>
+            <button id="cette-année" class="filter-btn">Cette année</button>
+            <button id="tout" class="filter-btn">Tout</button>
+        </div>
+        <div class="filter-group-custom">
+            <button id="personnalise-btn" class="filter-btn">Personnalisé</button>
+            <div id="custom-date-inputs" class="date-range-container" style="display: none;">
+                <input type="date" id="start-date" class="clean-input" placeholder="Date de début">
+                <input type="date" id="end-date" class="clean-input" placeholder="Date de fin">
+            </div>
+        </div>
+
+        <!-- Statistiques Globales (Mises à 0) -->
+        <p>
+        <div class="stats-grid">
+            <div class="stat-card main-stat bg-green text-white">
+                <h3>💸CHIFFRE D'AFFAIRES</h3>
+                <h2 id="ca">0 <small>FCFA</small></h2>
+            </div>
+            <div class="stat-card">
+                <h3>FACTURES GÉNÉRÉES</h3>
+                <h2 id="factures-générées">0</h2>
+            </div>
+            <div class="stat-card">
+                <h3>PAYÉES</h3>
+                <h2 id="payées">0 <small>réglées</small></h2>
+            </div>
+            <div class="stat-card">
+                <h3>IMPAYÉES</h3>
+                <h2 id="impayées">0 <small>à relancer</small></h2>
+            </div>
+        </div>
+        </p>
+
+        <!-- Statistiques de Stock (Mises à 0) -->
+
+
+        <!-- Graphiques -->
+        <div class="charts-container">
+            <div class="chart-wrapper">
+                <h3>📈 Évolution des revenus</h3>
+                <canvas id="revenueChart"></canvas>
+            </div>
+
+        </div>
+
+        <!-- Répertoire des Factures -->
+        <div class="invoice-list-container">
+            <div class="list-header">
+                <h2>Toutes mes factures</h2>
+                <div class="list-actions">
+                    <input id="recherche" type="text" placeholder="🔍Rechercher..." class="search-input">
+                    <select class="status-filter">
+                        <option value="all">Tous les statuts</option>
+                        <option value="paid">Payée</option>
+                        <option value="unpaid">Impayée</option>
+                    </select>
+                </div>
+            </div>
+            <table id="invoice-table" class="data-table">
+                <thead>
+                    <tr>
+                        <th id="n°-facture">N° FACTURE</th>
+                        <th id="client">CLIENT</th>
+                        <th id="date">DATE</th>
+                        <th id="montant">MONTANT</th>
+                        <th id="statut">STATUT</th>
+                        <th id="actions">ACTIONS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="6" style="text-align: center; color: var(--muted);">Aucune facture pour le moment.
+                            Crée ta première facture ! 🚀</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+
+</html>

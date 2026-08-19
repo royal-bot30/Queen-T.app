@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Total Clean Pro - Paramètres</title>
+    <link rel="stylesheet" href="../css/dashboard.css">
+    <link rel="stylesheet" href="../css/settings.css">
+    <script src="../js/settings.js" defer></script>
+    <script src="../js/indexcopie2.js" defer></script>
+    <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+    import { getFirestore, collection, getDocs, addDoc, updateDoc, deleteDoc, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-firestore.js";
+    import { getAuth, onAuthStateChanged, EmailAuthProvider, reauthenticateWithCredential, updatePassword } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-auth.js";
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyDYIKtqrK-fUumzBotjwMJqxtpzZeLhUQw",
+        authDomain: "queen-t.firebaseapp.com",
+        projectId: "queen-t",
+        storageBucket: "queen-t.firebasestorage.app",
+        messagingSenderId: "419154805005",
+        appId: "1:419154805005:web:67a8f499188ca891393044"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
+
+    // On expose tout globalement pour set.js
+    window.db = db;
+    window.auth = auth;
+    window.dbModules = { collection, getDocs, addDoc, updateDoc, deleteDoc, doc, setDoc, getDoc };
+    window.authModules = { onAuthStateChanged, EmailAuthProvider, reauthenticateWithCredential, updatePassword };
+</script>
+</head>
+
+<body class="bg-beige text-dark">
+
+    <header class="main-header">
+        <div class="logo-container">
+            <h2>📑 QUEEN-T</h2>
+        </div>
+        <nav class="main-nav">
+            <a href="dashboard.html" class="nav-link">📊 Tableau de bord</a>
+            <a href="builder.html" class="nav-link">✍️ Nouvelle facture</a>
+            <a href="stocks.html" class="nav-link">📦 Stocks</a>
+            <a href="settings.html" class="nav-link active">⚙️ Mon profil</a>
+        </nav>
+        <div class="user-menu">
+            <span class="user-avatar">P</span>
+            <a href="index.html" class="logout-btn">Déconnexion</a>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <h2>⚙️ Paramètres de l'entreprise</h2>
+        <p>Ces informations s'intégreront automatiquement dans tes factures.</p>
+
+        <form id="settings-form" class="settings-form" style="max-width: 600px; margin-top: 20px;">
+            <div class="form-group">
+                <label>Logo de l'entreprise</label>
+
+                <!-- Zone visuelle cliquable avec l'icône et le texte -->
+                <label for="input_logo" class="dropzone-logo" id="dropzone_container">
+                    <span class="dropzone-icon">📁</span>
+                    <span class="dropzone-text" id="dropzone_text">Cliquez pour ajouter votre logo</span>
+                    <!-- L'input natif est masqué mais reste totalement fonctionnel -->
+                    <input type="file" id="input_logo" name="logo_entreprise" accept="image/*" style="display: none;">
+                </label>
+
+                <!-- Conteneur pour afficher l'aperçu du fichier physiquement une fois choisi -->
+                <div id="aperçu_logo_container" class="apercu-logo-container hidden">
+                    <img id="image_apercu" src="" alt="Aperçu du logo">
+                    <span id="nom_fichier_selectionne"></span>
+                    <button type="button" id="btn_supprimer_logo" class="btn-supprimer-logo"
+                        title="Supprimer le logo">❌</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Nom de l'entreprise</label>
+                <input type="text" id="set-name" placeholder="Ex: Total Clean Pro">
+            </div>
+            <div class="form-group">
+                <label>Numéro RCCM</label>
+                <input type="text" id="set-rccm" placeholder="Ex: TG-LOM-2026-B-1234">
+            </div>
+            <div class="form-group">
+                <label>Adresse complète</label>
+                <input type="text" id="set-address" placeholder="Ex: Lomé, Togo">
+            </div>
+            <div class="form-group">
+                <label>Email de contact</label>
+                <input type="email" id="set-email" placeholder="contact@totalclean.com">
+            </div>
+            <div class="form-group">
+                <label>Téléphone</label>
+                <input type="tel" id="set-phone" placeholder="+228 90 00 00 00">
+            </div>
+
+            <button type="submit" class="btn-primary">💾 Sauvegarder les paramètres</button>
+        </form>
+        <h3>Changer de mot de passe</h3>
+        <form id="formulaire_changement_mdp" autocomplete="off">
+
+            <div class="form-group">
+                <label for="ancien_mot_de_passe">Ancien mot de passe</label>
+                <input id="ancien_mot_de_passe" name="ancien_mot_de_passe" type="password" class="clean-input" required>
+            </div>
+
+            <div class="form-group">
+                <label for="nouveau_mot_de_passe">Nouveau mot de passe</label>
+                <input id="nouveau_mot_de_passe" name="nouveau_mot_de_passe" type="password" class="clean-input"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmer_mot_de_passe">Confirmer le nouveau mot de passe</label>
+                <input id="confirmer_mot_de_passe" name="confirmer_mot_de_passe" type="password" class="clean-input"
+                    required>
+            </div>
+
+            <div class="modal-actions">
+                <button id="btn_annuler_mdp" type="button" class="btn-secondary">
+                    Annuler
+                </button>
+                <button id="btn_enregistrer_mdp" type="submit" class="btn-primary">
+                    Enregistrer
+                </button>
+            </div>
+
+        </form>
+    </main>
