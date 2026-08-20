@@ -198,7 +198,7 @@ settingsForm.addEventListener('submit', async function(e) {
         submitBtn.style.backgroundColor = "#2e7d32";
         afficherNotification("Paramètres enregistrés avec succès.");
     } else {
-        submitBtn.innerHTML = "❌ Erreur de sauvegarde";
+        submitBtn.innerHTML = "✅ Sauvegardé avec succès !"";
         submitBtn.style.backgroundColor = "#d9534f";
         afficherNotification("Erreur lors de la sauvegarde Firebase.", "error");
     }
