@@ -1,0 +1,409 @@
+/* =================================================================
+   STYLES GÉNÉRAUX & ESPACEMENTS DE LA PAGE STOCKS
+==================================================================== */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* En-tête de section (Titre + Actions) */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.section-header h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-main, #2d3748);
+    margin-bottom: 5px;
+}
+
+.section-header p {
+    color: var(--text-muted, #718096);
+    font-size: 14px;
+}
+
+/* =================================================================
+   BOUTONS ET ACTIONS
+==================================================================== */
+.actions-stocks {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid transparent;
+}
+
+.btn-primary {
+    background-color: var(--primary-pink, #ff007f);
+    color: #ffffff;
+    box-shadow: 0 2px 6px rgba(255, 0, 127, 0.2);
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background-color: var(--card-white, #ffffff);
+    color: var(--text-main, #2d3748);
+    border-color: var(--border-beige, #e2e8f0);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.btn-secondary:hover {
+    background-color: var(--bg-beige, #f7fafc);
+    border-color: var(--text-muted, #a0aec0);
+}
+
+/* Bouton Filtrer */
+.btn-filtrer {
+    background-color: #ffffff;
+    color: #1a202c;
+    border: 1px solid #cbd5e0;
+    padding: 12px 19px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-filtrer:hover {
+    background-color: #f7fafc;
+    border-color: #a0aec0;
+}
+
+/* Conteneur du filtre des semaines */
+.filtre-semaines-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--card-white, #ffffff);
+    border: 1px solid var(--border-beige, #e2e8f0);
+    padding: 10px 14px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+    flex-wrap: wrap;
+}
+
+.filtre-semaines-container label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-main, #2d3748);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* =================================================================
+   CHAMPS DE SAISIE ET INPUTS
+==================================================================== */
+.clean-input {
+    width: 100%;
+    max-width: 320px;
+    background-color: var(--card-white, #ffffff);
+    border: 1px solid var(--border-beige, #e2e8f0);
+    color: var(--text-main, #2d3748);
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01);
+}
+
+.clean-input:focus {
+    border-color: var(--primary-pink, #ff007f);
+    box-shadow: 0 0 0 3px rgba(255, 0, 127, 0.1);
+}
+
+/* =================================================================
+   TABLEAUX ET BLOCS DE CONTENU
+==================================================================== */
+.bloc-produits,
+.bloc-semaine,
+.bloc-suivi {
+    background-color: var(--card-white, #ffffff);
+    border: 1px solid var(--border-beige, #e2e8f0);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+}
+
+.bloc-produits h3,
+.bloc-semaine h3,
+.bloc-suivi h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-main, #2d3748);
+    margin-bottom: 16px;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    text-align: left;
+}
+
+.data-table th,
+.data-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border-beige, #e2e8f0);
+    font-size: 14px;
+}
+
+.data-table th {
+    font-weight: 600;
+    color: var(--text-muted, #718096);
+    background-color: var(--bg-beige, #faf8f5);
+}
+
+/* Infos semaine */
+.infos-semaine {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    background-color: var(--bg-beige, #faf8f5);
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid var(--border-beige, #e2e8f0);
+}
+
+/* =================================================================
+   CARTES DE RÉSUMÉ & STATISTIQUES
+==================================================================== */
+.bloc_resume {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.stats-grid.stock-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    grid-column: span 2;
+}
+
+.stat-card,
+.carte_resume {
+    background-color: var(--card-white, #ffffff);
+    border: 1px solid var(--border-beige, #e2e8f0);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.2s ease;
+}
+
+.stat-card:hover,
+.carte_resume:hover {
+    border-color: var(--primary-pink, #ff007f);
+}
+
+.stat-card h3,
+.carte_resume h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted, #718096);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+.stat-card h2,
+.carte_resume p {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--primary-pink, #ff007f);
+    margin: 0;
+}
+
+.stat-card h2 {
+    color: var(--text-main, #2d3748);
+}
+
+.chart-wrapper {
+    background-color: var(--card-white, #ffffff);
+    border: 1px solid var(--border-beige, #e2e8f0);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+}
+
+.chart-wrapper h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text-main, #2d3748);
+    margin-bottom: 16px;
+}
+
+/* Section Historique bouton isolé */
+.bloc_historique {
+    display: flex;
+    justify-content: flex-start;
+}
+
+/* =================================================================
+   MODALES (Fenêtres surgissantes)
+==================================================================== */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 15px;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background-color: var(--card-white, #ffffff);
+    padding: 30px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.modal-content h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-main, #2d3748);
+    margin: 0;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-main, #2d3748);
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.modal-content #liste_historique_semaines {
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 5px;
+    font-size: 14px;
+    color: var(--text-main, #2d3748);
+}
+
+.modal-content #btn_fermer_historique {
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.modal-content .clean-input {
+    max-width: 100%;
+}
+
+/* =================================================================
+   RESPONSIVE DESIGN (Media Queries)
+==================================================================== */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 15px;
+        gap: 20px;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .actions-stocks {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .actions-stocks button,
+    .filtre-semaines-container {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .clean-input {
+        max-width: 100%;
+    }
+
+    .bloc_resume,
+    .stats-grid.stock-stats {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .stats-grid.stock-stats {
+        grid-column: span 1;
+    }
+
+    .carte_resume p,
+    .stat-card h2 {
+        font-size: 24px;
+    }
+
+    .bloc-produits,
+    .bloc-suivi {
+        overflow-x: auto;
+    }
+
+    .data-table {
+        min-width: 500px;
+    }
+
+    .modal-content {
+        padding: 20px;
+    }
+}

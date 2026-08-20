@@ -1,0 +1,367 @@
+/* --- RESET & VARIABLES DASHBOARD --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --bg-beige: #f4f1ea;        /* Fond général beige */
+    --card-white: #ffffff;      /* Fond des cartes */
+    --text-main: #1a1a1a;       /* Texte principal noir/foncé */
+    --text-muted: #666666;      /* Texte secondaire */
+    --primary-pink: #ff007f;    /* Rose éclatant */
+    --primary-pink-hover: #e00070;
+    --border-beige: #e3ded3;    /* Bordures douces */
+}
+
+/* --- STRUCTURE GÉNÉRALE --- */
+body {
+    background-color: var(--bg-beige);
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* 1. NAVBAR */
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: var(--card-white);
+    border-bottom: 1px solid var(--border-beige);
+    width: 100%;
+}
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-link, .main-header a {
+    background-color: var(--bg-beige);
+    color: var(--text-main);
+    border: 1px solid var(--border-beige);
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.nav-link:hover, .main-header a:hover {
+    background-color: #e8e3d8;
+}
+
+.nav-link.active, .main-header a.active {
+    background-color: var(--primary-pink);
+    color: #ffffff;
+    border-color: var(--primary-pink);
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-avatar {
+    background-color: var(--primary-pink);
+    color: #fff;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.logout-btn {
+    background-color: transparent !important;
+    border: none !important;
+    color: var(--text-muted) !important;
+    padding: 0 !important;
+}
+
+.logout-btn:hover {
+    color: var(--primary-pink) !important;
+    background-color: transparent !important;
+}
+
+/* 2. CONTENU PRINCIPAL */
+.main-content {
+    width: 92%;
+    max-width: 1300px;
+    margin: 30px auto;
+}
+
+/* --- HEADER DU DASHBOARD --- */
+.dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.dashboard-header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.btn-pink, .btn-primary {
+    background-color: var(--primary-pink);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-pink:hover, .btn-primary:hover {
+    background-color: var(--primary-pink-hover);
+}
+
+/* 3. BOUTONS DE FILTRE DE PÉRIODE */
+.time-filters, .filters-container {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+/* Par défaut, tous les boutons sont en fond beige avec bordure douce */
+.filter-btn {
+    background-color: var(--card-white);
+    color: var(--text-main);
+    border: 1px solid var(--border-beige);
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+    background-color: #f0ebe1;
+}
+
+/* Le bouton actif par défaut ("Ce mois-ci") ou cliqué devient noir avec texte blanc */
+.filter-btn.active {
+    background-color: #000000;
+    color: #ffffff;
+    border-color: #000000;
+}
+
+/* --- LES CARTES DU DASHBOARD --- */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    background-color: var(--card-white);
+    border: 1px solid var(--border-beige);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.stat-card h3 {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+}
+
+.stat-card h2 {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.stat-card h2 small {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* 4. CARTE "REVENUS PÉRIODE" : Rose éclatant et texte en blanc */
+.stat-card.main-stat, .stat-card.revenue-highlight {
+    background-color: var(--primary-pink) !important;
+    border-color: var(--primary-pink) !important;
+    color: #ffffff !important;
+}
+
+.stat-card.main-stat h3, .stat-card.revenue-highlight h3 {
+    color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.stat-card.main-stat h2, .stat-card.revenue-highlight h2 {
+    color: #ffffff !important;
+}
+
+/* --- SECTION GRAPHIQUES --- */
+.charts-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.chart-wrapper {
+    background-color: var(--card-white);
+    border: 1px solid var(--border-beige);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.chart-wrapper h3 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: var(--text-main);
+}
+
+canvas {
+    width: 100% !important;
+    max-height: 250px;
+}
+
+/* --- RÉPERTOIRE DES FACTURES --- */
+.invoice-list-container {
+    background-color: var(--card-white);
+    border: 1px solid var(--border-beige);
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.list-header h2 {
+    font-size: 18px;
+    color: var(--text-main);
+}
+
+.list-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.search-input, .status-filter {
+    background-color: var(--bg-beige);
+    border: 1px solid var(--border-beige);
+    color: var(--text-main);
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+}
+
+.search-input:focus, .status-filter:focus {
+    border-color: var(--primary-pink);
+}
+
+/* Tableau */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--card-white);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-beige);
+}
+
+.data-table th, .data-table td {
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-beige);
+}
+
+.data-table th {
+    background-color: #faf8f5;
+    font-weight: 600;
+    color: var(--text-muted);
+    font-size: 12px;
+    letter-spacing: 0.5px;
+}
+
+.data-table td {
+    font-size: 14px;
+    color: var(--text-main);
+}
+
+/* 5. RESPONSIVE DESIGN (MEDIA QUERIES) */
+@media (max-width: 992px) {
+    .charts-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .main-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .main-content {
+        width: 95%;
+        margin: 15px auto;
+    }
+
+    .dashboard-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .dashboard-header .btn-primary {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .list-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .list-actions {
+        flex-direction: column;
+    }
+
+    .data-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}

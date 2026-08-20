@@ -1,0 +1,404 @@
+/* --- STYLISATION COMPLÉMENTAIRE POUR LE BUILDER DE FACTURE --- */
+
+/* Conteneur global de la zone de création */
+.invoice-paper {
+    border-radius: 12px;
+    padding: 30px;
+    border: 1px solid var(--border-beige);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+/* Sections des formulaires d'entreprise et client */
+.issuer-setup-section, 
+.client-info-section {
+    background-color: var(--card-white);
+    border: 1px solid var(--border-beige);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.issuer-setup-section h3, 
+.client-info-section h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--border-beige);
+    padding-bottom: 8px;
+}
+
+/* Harmonisation des inputs et selects */
+.clean-input {
+    width: 100%;
+    background-color: var(--bg-beige);
+    border: 1px solid var(--border-beige);
+    color: var(--text-main);
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.clean-input:focus {
+    border-color: var(--primary-pink);
+    background-color: var(--card-white);
+    box-shadow: 0 0 0 3px rgba(255, 0, 127, 0.1);
+}
+
+/* --- ZONE D'UPLOAD DU LOGO (CORRIGÉE) --- */
+.issuer-setup-section div:has(#issuer-logo-input) {
+    position: relative;
+}
+
+/* On stylise le label pour qu'il ressemble à une belle boîte de dépôt */
+.issuer-setup-section label[for="issuer-logo-input"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    min-height: 44px;
+    background-color: var(--bg-beige);
+    border: 1px dashed var(--border-beige);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.issuer-setup-section label[for="issuer-logo-input"]:hover {
+    background-color: var(--card-white);
+    border-color: var(--primary-pink);
+    color: var(--primary-pink);
+}
+
+/* L'input fichier devient invisible mais couvre tout le bloc pour capturer le clic */
+#issuer-logo-input {
+    position: absolute;
+    top: 18px; /* Ajuste selon la hauteur de ton label */
+    left: 0;
+    width: 100%;
+    height: calc(100% - 18px);
+    opacity: 0;
+    cursor: pointer;
+    z-index: 2;
+}
+.issuer-logo-container {
+    width: 120px;
+    height: 120px;
+    border: 1px dashed var(--border-beige);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--bg-beige);
+}
+
+#issuer-logo-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: none;
+}
+
+
+/* --- 2. SECTION DÉTAILS DE LA FACTURE & CADRES --- */
+.invoice-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.invoice-meta h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 4px;
+    border-bottom: 1px solid var(--border-beige);
+    padding-bottom: 8px;
+}
+
+.invoice-meta p {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    margin: 0;
+}
+
+/* Cadre élégant autour du Numéro de facture et de la Date */
+#invoice-number,
+#invoice-date {
+    display: inline-block;
+    background-color: var(--card-white);
+    border: 1px solid var(--border-beige);
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-weight: 600;
+    color: var(--text-main);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.invisible-input {
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    color: inherit;
+    outline: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: right;
+}
+
+/* Boutons secondaires (Télécharger, Envoyer) */
+.btn-secondary {
+    background-color: var(--card-white);
+    color: var(--text-main);
+    border: 1px solid var(--border-beige);
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+
+.btn-secondary:hover {
+    background-color: var(--bg-beige);
+    border-color: var(--text-muted);
+}
+
+/* Bouton d'ajout de ligne de tableau */
+.add-item-btn {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+/* Bouton de suppression de ligne (Icône) */
+.icon-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.icon-btn:hover {
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+/* Section des totaux finaux */
+.invoice-totals {
+    background-color: #faf8f5;
+    border: 1px solid var(--border-beige);
+    padding: 15px 20px;
+    border-radius: 8px;
+    display: inline-flex;
+    float: right;
+    min-width: 250px;
+}
+
+.grand-total {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--primary-pink);
+}
+
+/* --- AJUSTEMENTS RESPONSIVES (Mobile) --- */
+@media (max-width: 768px) {
+    .invoice-paper {
+        padding: 15px;
+    }
+    
+    .invoice-top {
+        flex-direction: column;
+    }
+
+    .invoice-meta {
+        text-align: left !important;
+        width: 100%;
+    }
+
+    .invoice-meta p {
+        justify-content: space-between;
+    }
+
+    .invoice-totals {
+        float: none;
+        width: 100%;
+    }
+
+    .builder-actions {
+        flex-direction: column;
+    }
+
+    .builder-actions button {
+        width: 100%;
+        justify-content: center;
+    }
+}
+.issuer-logo-container img, .apercu-logo-container img {
+    max-width: 150px; /* Ajuste selon ton besoin */
+    max-height: 100px;
+    display: block;   /* Important pour qu'elle s'affiche */
+    object-fit: contain;
+}
+.hidden {
+    display: none !important;
+}
+/* 1. Fond général de la facture en beige doux */
+#invoice-final-paper {
+    background-color: #fdfbf7 !important; /* Beige très léger et chaleureux */
+    border: 1px solid #e6dcc3 !important;
+}
+
+/* 2. En-tête de la facture en fond rose poudré élégant */
+#invoice-final-paper > div:first-child {
+    background-color: #ffe5ec; /* Rose pastel chic */
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* Titre FACTURE et numéros en harmonie */
+#invoice-final-paper h1 {
+    color: #d81159 !important; /* Rose foncé / framboise */
+}
+
+/* 3. Le tableau : thead en rose, tbody en blanc/beige */
+#invoice-final-paper table {
+    background-color: #ffffff; /* Fond blanc pour les articles */
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+#invoice-final-paper thead tr {
+    background-color: #ffb3c1 !important; /* Fond rose pour l'en-tête du tableau */
+    color: #590d22 !important; /* Texte foncé bien lisible */
+}
+
+#invoice-final-paper th {
+    color: #590d22 !important;
+}
+
+#invoice-final-paper tbody tr {
+    background-color: #ffffff; /* Lignes du tableau en blanc pur */
+}
+
+#invoice-final-paper tbody tr:hover {
+    background-color: #f8f0ed !important; /* Léger effet au survol */
+}
+
+/* 4. Section du Total en bas mise en valeur */
+#invoice-final-paper div[style*="text-align: right;"] {
+    background-color: #ffe5ec; /* Petit encadré rose doux pour le total */
+    padding: 1px 2px;
+    border-radius: 8px;
+    margin-top: 0px;
+    display: inline-block;
+    float: none;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Le montant du Total écrit en rose intense */
+#preview-grand-total {
+    color: #d81159 !important; /* Rose framboise vif */
+    font-size: 1.4rem;
+}
+/* ========================================== */
+/* RESPONSIVE DESIGN (MOBILES & TABLETTES)    */
+/* ========================================== */
+
+@media screen and (max-width: 768px) {
+    /* Réduction des marges globales du papier de facture sur petit écran */
+    #invoice-final-paper {
+        padding: 15px !important;
+    }
+
+    /* L'en-tête (Logo/Entreprise à gauche et N° Facture à droite) passe en colonne */
+    #invoice-final-paper > div:first-child {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+    }
+
+    /* Aligner proprement la partie droite (N° de facture et date) sur mobile */
+    #invoice-final-paper > div:first-child > div:last-child {
+        text-align: left !important;
+        margin-top: 15px !important;
+    }
+
+    /* Rendre le tableau des articles défilable horizontalement pour éviter qu'il ne casse l'écran */
+    #invoice-final-paper table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    /* Ajuster la taille des textes pour les petits écrans */
+    #invoice-final-paper h2 {
+        font-size: 18px !important;
+    }
+    
+    #invoice-final-paper h1 {
+        font-size: 20px !important;
+    }
+}
+#save-loading-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.save-loading-box {
+  background: white;
+  padding: 25px 35px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.save-spinner {
+  width: 35px;
+  height: 35px;
+  margin: 0 auto 12px;
+  border: 4px solid #ddd;
+  border-top-color: #333;
+  border-radius: 50%;
+  animation: save-spin 0.8s linear infinite;
+}
+
+.save-loading-box p {
+  margin: 0;
+  font-size: 15px;
+  color: #333;
+}
+
+@keyframes save-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

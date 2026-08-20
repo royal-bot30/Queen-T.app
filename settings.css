@@ -1,0 +1,342 @@
+/* =================================================================
+   STYLES GÉNÉRAUX DE LA PAGE PARAMÈTRES / PROFIL
+==================================================================== */
+.main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 35px; /* Aère généreusement les sections pour éviter l'effet étouffé */
+    padding: 30px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.main-content h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-main, #2d3748);
+    margin-bottom: 5px;
+}
+
+.main-content > p {
+    color: var(--text-muted, #718096);
+    font-size: 14px;
+    margin-top: -25px;
+    margin-bottom: 10px;
+}
+
+.main-content h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-main, #2d3748);
+    border-top: 1px solid var(--border-beige, #e2e8f0);
+    padding-top: 30px;
+    margin-top: 10px;
+}
+
+/* =================================================================
+   FORMULAIRES & CHAMPS DE SAISIE
+==================================================================== */
+.settings-form,
+#formulaire_changement_mdp {
+    background-color: var(--card-white, #ffffff);
+    border: 1px solid var(--border-beige, #e2e8f0);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 100% !important; /* Force une belle largeur propre */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-main, #2d3748);
+}
+
+/* Style élégant pour tous les inputs textes, emails, tel, password */
+.settings-form input[type="text"],
+.settings-form input[type="email"],
+.settings-form input[type="tel"],
+.clean-input {
+    width: 100%;
+    background-color: var(--card-white, #ffffff);
+    border: 1px solid var(--border-beige, #e2e8f0);
+    color: var(--text-main, #2d3748);
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01);
+}
+
+.settings-form input:focus,
+.clean-input:focus {
+    border-color: var(--primary-pink, #ff007f);
+    box-shadow: 0 0 0 3px rgba(255, 0, 127, 0.1);
+}
+
+/* =================================================================
+   ZONE DE TÉLÉCHARGEMENT DU LOGO (Personnalisée et large)
+==================================================================== */
+.settings-form input[type="file"] {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    background-color: var(--bg-beige, #faf8f5);
+    border: 2px dashed var(--border-beige, #cbd5e0);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--text-muted, #718096);
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.settings-form input[type="file"]:hover {
+    border-color: var(--primary-pink, #ff007f);
+    background-color: rgba(255, 0, 127, 0.02);
+}
+
+/* =================================================================
+   BOUTONS (Harmonisés, équilibrés et modernes)
+==================================================================== */
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 1px solid transparent;
+}
+
+/* Bouton principal (Enregistrer / Sauvegarder) */
+.btn-primary {
+    background-color: var(--primary-pink, #ff007f);
+    color: #ffffff;
+    box-shadow: 0 2px 6px rgba(255, 0, 127, 0.2);
+}
+
+.btn-primary:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+/* Bouton secondaire (Annuler) avec fond blanc élégant et propre */
+.btn-secondary {
+    background-color: var(--card-white, #ffffff);
+    color: var(--text-main, #2d3748);
+    border-color: var(--border-beige, #e2e8f0);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.btn-secondary:hover {
+    background-color: var(--bg-beige, #f7fafc);
+    border-color: var(--text-muted, #a0aec0);
+}
+
+/* =================================================================
+   RESPONSIVE DESIGN (Mobilité optimale)
+==================================================================== */
+@media (max-width: 768px) {
+    .main-content {
+        padding: 15px;
+        gap: 20px;
+    }
+
+    .settings-form,
+    #formulaire_changement_mdp {
+        padding: 20px;
+    }
+
+    .modal-actions {
+        flex-direction: column-reverse;
+        width: 100%;
+    }
+
+    .modal-actions button {
+        width: 100%;
+    }
+}
+/* =================================================================
+   RESPONSIVE DESIGN AVANCÉ (Téléphones portables et mobiles)
+==================================================================== */
+
+@media (max-width: 768px) {
+    /* Ajustement des marges principales pour coller aux petits écrans sans déborder */
+    .main-content {
+        padding: 12px;
+        gap: 20px;
+    }
+
+    /* Réduction des espacements internes dans les formulaires */
+    .settings-form,
+    #formulaire_changement_mdp {
+        padding: 16px;
+        border-radius: 10px;
+    }
+
+    /* Titres de page adaptés pour mobile */
+    .main-content h2 {
+        font-size: 20px;
+    }
+
+    .main-content h3 {
+        font-size: 16px;
+        padding-top: 20px;
+    }
+
+    /* Champs de saisie taillés pour le tactile (hauteur confortable) */
+    .settings-form input[type="text"],
+    .settings-form input[type="email"],
+    .settings-form input[type="tel"],
+    .clean-input {
+        padding: 14px 12px;
+        font-size: 16px; /* Évite le zoom automatique agaçant sur iOS au focus */
+    }
+
+    /* Zone de fichier logo plus compacte sur mobile */
+    .settings-form input[type="file"] {
+        padding: 15px 10px;
+        font-size: 12px;
+    }
+
+    /* Organisation verticale complète pour les boutons d'action du formulaire mdp */
+    .modal-actions {
+        flex-direction: column-reverse;
+        gap: 10px;
+        width: 100%;
+        margin-top: 15px;
+    }
+
+    .modal-actions button,
+    .settings-form .btn-primary {
+        width: 100%;
+        padding: 14px;
+        font-size: 15px; /* Plus facile à presser avec le pouce */
+        justify-content: center;
+    }
+}
+
+/* Petits mobiles (très petits écrans de type iPhone SE ou équivalents) */
+@media (max-width: 480px) {
+    .main-content {
+        padding: 8px;
+    }
+
+    .settings-form,
+    #formulaire_changement_mdp {
+        padding: 12px;
+    }
+}
+/* =================================================================
+   ZONE DE DÉPÔT / UPLOAD DE LOGO PERSONNALISÉE
+==================================================================== */
+.dropzone-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 30px 20px;
+    background-color: var(--bg-beige, #faf8f5);
+    border: 2px dashed var(--border-beige, #cbd5e0);
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.dropzone-logo:hover {
+    border-color: var(--primary-pink, #ff007f);
+    background-color: rgba(255, 0, 127, 0.02);
+}
+
+.dropzone-icon {
+    font-size: 32px; /* Taille de l'icône de dossier 📁 */
+}
+
+.dropzone-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted, #718096);
+}
+
+/* Style du conteneur d'aperçu du fichier (géré par JS ensuite) */
+.apercu-logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background-color: var(--bg-beige, #faf8f5);
+    border: 1px solid var(--border-beige, #e2e8f0);
+    border-radius: 8px;
+    margin-top: 8px;
+}
+
+.apercu-logo-container.hidden {
+    display: none;
+}
+
+#image_apercu {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 4px;
+    border: 1px solid var(--border-beige, #e2e8f0);
+    background: #ffffff;
+}
+
+#nom_fichier_selectionne {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-main, #2d3748);
+    flex-grow: 1;
+    margin-left: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.btn-supprimer-logo {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 4px;
+    transition: transform 0.1s ease;
+}
+
+.btn-supprimer-logo:hover {
+    transform: scale(1.1);
+}
+.issuer-logo-container img, .apercu-logo-container img {
+    max-width: 150px; /* Ajuste selon ton besoin */
+    max-height: 100px;
+    display: block;   /* Important pour qu'elle s'affiche */
+    object-fit: contain;
+}
+.hidden {
+    display: none !important;
+}
